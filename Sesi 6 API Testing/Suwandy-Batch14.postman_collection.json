@@ -1,0 +1,128 @@
+{
+  "info": {
+    "_postman_id": "b912e94e-21a6-4053-abb3-9445c0075d7f",
+    "name": "Suwandy-Batch14",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "11419523",
+    "_collection_link": "https://go.postman.co/collection/11419523-b912e94e-21a6-4053-abb3-9445c0075d7f?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Login",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status_OK\", () => {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Response data exist\", () => {\r",
+              "    const resp = pm.response.json();\r",
+              "    pm.expect(resp.token).to.not.be.empty;\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"username\": \"admin\",\r\n  \"password\": \"admin\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base-url}}/api/login",
+          "host": ["{{base-url}}"],
+          "path": ["api", "login"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Users",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status_OK\", () => {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Response data exist\", () => {\r",
+              "    const resp = pm.response.json();\r",
+              "    pm.expect(resp.users).to.not.be.empty;\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{base-url}}/api/users",
+          "host": ["{{base-url}}"],
+          "path": ["api", "users"]
+        }
+      },
+      "response": []
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [""]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [""]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "base-url",
+      "value": "https://belajar-bareng.onrender.com"
+    },
+    {
+      "key": "token",
+      "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNzcwNzMyOTAzLCJleHAiOjE3NzA3MzY1MDN9.ZeOp8PC6Wacmtnyh9rKlSwX6VKKoobVBvGlHSDB3ja0"
+    }
+  ]
+}
