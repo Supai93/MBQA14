@@ -1,5 +1,7 @@
 import http from "k6/http";
 import { check } from "k6";
+import { htmlReport } from "../dist/bundle.js";
+import { textSummary } from "../dist/index.js";
 import {
   BASE_URL,
   ENDPOINT,
@@ -7,9 +9,16 @@ import {
   PAYLOAD_LOGIN,
 } from "../config/endpoint.js";
 
+export function handleSummary(data) {
+  return {
+    "../reports/chain.test.html": htmlReport(data, { title: "Chain Test" }),
+    stdout: textSummary(data, { indent: " ", enableColors: true }),
+  };
+}
+
 export let options = {
-  vus: 3,
-  duration: "4s",
+  vus: 5,
+  duration: "10s",
 };
 
 export default function () {
