@@ -1,0 +1,17 @@
+{
+  "name": "selenium-mocha",
+  "version": "1.0.0",
+  "description": "selenium webdriver tests using mocha",
+  "scripts": {
+    "test": "mocha tests --recursive --timeout 60000"
+  },
+  "dependencies": {
+    "selenium-webdriver": "^4.17.0"
+  },
+  "devDependencies": {
+    "mocha": "^11.7.5",
+    "mochawesome": "^7.1.4",
+    "mocha-simple-html-reporter": "^2.0.0",
+    "chai": "^6.2.2"
+  }
+}
