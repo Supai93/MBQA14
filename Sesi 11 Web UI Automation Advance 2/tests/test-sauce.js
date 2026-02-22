@@ -1,5 +1,6 @@
 const { Builder } = require("selenium-webdriver");
 const LoginAction = require("./actions/login.action");
+const { compareScreenshot } = require("../utilities/visual_regression.helper");
 
 describe("SauceDemo Login Test", function () {
   let driver;
@@ -20,6 +21,8 @@ describe("SauceDemo Login Test", function () {
     await loginAction.inputPassword("secret_sauce");
     await loginAction.clickLogin();
     await loginAction.assertLoginSuccess();
+
+    await compareScreenshot(driver, "success_login");
   });
 
   it("NEGATIVE - invalid user", async () => {
@@ -29,6 +32,8 @@ describe("SauceDemo Login Test", function () {
     await loginAction.assertLoginFailed(
       "Epic sadface: Username and password do not match any user in this service",
     );
+
+    await compareScreenshot(driver, "invalid_username");
   });
 
   it("NEGATIVE - wrong password", async () => {
@@ -38,6 +43,8 @@ describe("SauceDemo Login Test", function () {
     await loginAction.assertLoginFailed(
       "Epic sadface: Username and password do not match any user in this service",
     );
+
+    await compareScreenshot(driver, "wrong_password");
   });
 
   it("NEGATIVE - login locked_out_user", async () => {
@@ -47,5 +54,7 @@ describe("SauceDemo Login Test", function () {
     await loginAction.assertLoginFailed(
       "Epic sadface: Sorry, this user has been locked out.",
     );
+
+    await compareScreenshot(driver, "locked_out_user");
   });
 });
